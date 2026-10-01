@@ -128,9 +128,10 @@ class NumberGuessingGameTest(unittest.TestCase):
 
     def test_guesses_recorded_in_order(self):
         game = NumberGuessingGame(secret_number=42)
-        game.make_guess(10)
-        game.make_guess(60)
-        self.assertEqual(game.guesses, (10, 60))
+        for guess in (60, 10, 60, 5):
+            game.make_guess(guess)
+        self.assertEqual(game.guesses, (60, 10, 5))
+        self.assertEqual(game.attempts_used, 3)
 
 
 if __name__ == "__main__":

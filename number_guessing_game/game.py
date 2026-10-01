@@ -83,7 +83,7 @@ class NumberGuessingGame:
             raise GuessValidationError("secret_number must be within the configured range")
 
         self._attempts_used = 0
-        self._guesses: set[int] = set()
+        self._guesses: dict[int, None] = {}
         self._won = False
 
     @property
@@ -142,7 +142,7 @@ class NumberGuessingGame:
                 self.remaining_attempts,
             )
 
-        self._guesses.add(guess)
+        self._guesses[guess] = None
         self._attempts_used += 1
         if guess == self._secret_number:
             self._won = True
